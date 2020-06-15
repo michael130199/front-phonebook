@@ -112,6 +112,7 @@
 
         <hr class="mb-3">
 
+        <!-- 
         <div>
           <div class="row image_for_edit" *ngIf="!filesToUpload && contact.image && contact.image != 'null'">
             <div class="col-md-12">
@@ -119,32 +120,22 @@
                     class="image">
               </div>
           </div>
-
           <div class="row image_for_edit" *ngIf="filesToUpload">
-              
               <div class="col-md-12" id="port">
-                <!-- Se agrega en la imagen con js --> 
               </div>
-
           </div>
-
           <div class="row my-4">
-
               <div class="col-md-12">
-
                   <label for="avatar">Sube un avatar para el contacto</label>
-
                   <input type="file" 
                       name="avatar"
                       class="form-control import-img" 
                       id="avatar"
                       (change)="fileChangeEvent($event)">
-
               </div>
-
           </div>
-
-        </div>
+        </div> 
+        -->
 
         <div class="row my-4 justify-content-center">
           <div class="col-md-6">
@@ -156,8 +147,6 @@
           </div>
 
         </div>
-
-        <hr class="mb-3" *ngIf="show.plus_custom">
 
         <div *ngIf="show.plus_custom">
 
