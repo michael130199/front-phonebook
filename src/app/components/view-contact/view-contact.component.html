@@ -1,0 +1,117 @@
+
+<div class="row mt-3">
+  <div class="col-md-1">
+      <a class="btn btn-dark btn-circle text-light" [routerLink]="['/home']">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+
+  <div class="col-md-12">
+
+      <div class="card card-contact"><!-- card -->
+
+          <div class="row no-gutters">
+
+              <div class="col-md-4 card-img bg-primary">
+                  
+                  <a href="{{url + 'imagen/' + contact?.image}}" target="_blank" *ngIf="contact?.image">
+
+                      <img src="{{url + 'imagen/' + contact?.image}}"
+                          class="card-img-top"
+                          *ngIf="contact?.image">
+
+                  </a>
+
+                  <h1 class="avatar-letter text-light" *ngIf="!contact?.image"> {{ contact?.name[0] }}</h1>  
+
+              </div>
+
+              <div class="col-md-6">
+
+                  <div class="card-body">
+          
+                      <h5 class="card-title">
+                          {{contact?.name + ' ' + contact?.surname }}
+                      </h5>
+                      
+                      <div>
+                        <label class="card-subtitle">Numeros de Telefónos:</label>
+                        <p *ngFor="let phone of contact?.phones">
+                          <i class="fas fa-phone"></i> {{ phone?.tag + ': +' + phone?.number}} 
+                        </p>
+                        <hr class="mb-3">
+                      </div>
+                      
+                      <div class="mt-4" *ngIf="contact?.email[0].name != ''">
+
+                        <label class="card-subtitle">Correos Electrónicos:</label>
+                        <p class="card-text" *ngFor="let email of contact?.email">
+                          <i class="fas fa-envelope"></i> {{ email?.tag + ': ' + email?.name }}
+                        </p>
+                        <hr class="mb-3">
+                      </div>
+              
+                      <div class="mt-4" *ngIf="contact?.address || contact?.relationship || contact?.note">
+                        <label class="card-subtitle">Informacion Adicional:</label>
+
+                        <p class="card-text" *ngIf="contact?.address">
+                          <i class="fas fa-book"></i> {{ 'Direccion: ' + contact?.address}}
+                        </p>
+                        <p class="card-text" *ngIf="contact?.relationship">
+                          <i class="fas fa-users"></i> {{ 'Relación: ' + contact?.relationship }}
+                        </p>
+                        <p *ngIf="contact?.note">
+                          <i class="fas fa-save"></i> {{ 'Nota: ' +  contact?.note }}
+                        </p>
+                        <hr class="mb-3">
+                      </div>
+
+                      <div class="mt-4" *ngIf="contact?.custom_field[0].name != ''">
+                        <label class="card-subtitle">Campos Personalizados:</label>
+
+                        <p class="card-text mt-4" *ngFor="let custom of contact?.custom_field">
+                          <i class="fas fa-plus"></i> {{ custom.tag + ': ' + custom.name }}
+                        </p>
+                      </div>
+
+                  </div>
+
+              </div>
+
+              <div class="col-md-2 p-1 row align-items-center justify-content-center">
+                  
+                  <div>
+
+                      <button class="btn btn-primary btn-block"
+                        [routerLink]="['/edit', contact?._id]">
+                          Editar
+                      </button>
+
+                      <button class="btn btn-danger btn-block" (click)="openModalDelete()" data-toggle="modal" data-target="#exampleModal">
+                        Eliminar
+                      </button>
+
+                  </div>
+
+              </div>
+      
+          </div>
+      
+      </div><!-- card -->
+
+  </div>
+
+</div>
+
+
+<modal-delete class="modal " 
+    id="exampleModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="exampleModalLabel" 
+    aria-hidden="true"
+    [contact]="contactDelete">
+</modal-delete>

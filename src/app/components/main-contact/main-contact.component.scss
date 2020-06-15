@@ -1,0 +1,26 @@
+.app-img {
+  object-fit: cover;
+  object-position: center;
+  height: 64px;
+  width: 64px;
+}
+
+.avatar-container {
+  display: inline-block;
+  padding: 0px;
+  margin: 0px;
+  width: 64px;
+  height: 64px;
+  
+  border-radius: 100%;
+  overflow: hidden;
+
+}
+
+.avatar-letter{
+  width: 64px;
+  height: 64px;
+  margin:auto;
+  padding-top: 12px;
+  text-align:center;
+}

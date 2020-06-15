@@ -1,0 +1,33 @@
+<div class="modal-dialog" role="document">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+
+      <h5 class="modal-title" id="exampleModalLabel">¡Cuidado!</h5>
+
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+        <span aria-hidden="true">&times;</span>
+
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <b>¿Seguro que quieres eliminar a {{ contact?.name }} ?</b>, porque no se podra recuperar los datos del contacto despues
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">No, mejor no.</button>
+
+      <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="contactDelete()">Si quiero eliminarlo.</button>
+
+    </div>
+
+  </div>
+  
+</div>

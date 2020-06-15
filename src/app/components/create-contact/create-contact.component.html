@@ -1,0 +1,314 @@
+<div class="row mt-3">
+  <div class="col-md-1">
+      <a class="btn btn-dark btn-circle text-light" [routerLink]="['/home']">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+  </div>
+</div>
+
+<div class="row justify-content-center end">
+
+  <div class="col-md-10">
+  
+      <h3 class="my-3 text-center">{{title}}</h3>
+  
+      <form #formAdd="ngForm"
+          (ngSubmit)="onSubmit()">
+
+        <div class="row my-4">
+
+            <div class="col-md-6">
+
+                <label for="name">Nombre<span class="text-danger">*</span></label>
+
+                <input type="text"
+                    name="name"
+                    [(ngModel)]="contact.name"
+                    #name="ngModel"
+                    id="name"
+                    class="form-control"
+                    required>
+
+                <span *ngIf="!name.valid && name.touched">
+                    El nombre es obligatorio
+                </span>
+
+            </div>
+
+            <div class="col-md-6">
+
+              <label for="name">Apellido</label>
+
+              <input type="text"
+                  name="name"
+                  [(ngModel)]="contact.surname"
+                  #name="ngModel"
+                  id="name"
+                  class="form-control">
+
+          </div>
+
+        </div>
+
+        <hr class="mb-3">
+
+        <div class="row my-4" *ngFor="let phone of phones; let i = index">
+
+          <div class="col-md-5" >
+
+            <label for="number{{i}}">Numero de Telefóno #{{i+1}}<span class="text-danger">*</span></label>
+
+            <input type="number"
+                name="number{{i}}"
+                [(ngModel)]="phone.number"
+                #name="ngModel"
+                id="number{{i}}"
+                class="form-control"
+                min="10"
+                max="999999999999"
+                required>
+
+            <span *ngIf="!name.valid && name.touched">
+                El numero de telefónico numero {{i+1}} es obligatorio
+            </span>
+
+          </div>
+
+          <div class="col-md-5">
+
+            <label for="ptag{{i}}">Etiqueta #{{ i+1 }}</label>
+
+            <select class="form-control"
+              id="ptag{{i}}"
+              name="ptag{{i}}"
+              [(ngModel)]="phone.tag"
+              #name="ngModel">
+              <option value="">Sin Etiqueta</option>
+              <option value="Movil">Móvil</option>
+              <option value="Trabajo">Trabajo</option>
+              <option value="Principal">Principal</option>
+              <option value="Otro">Otro</option>
+            </select>
+
+
+          </div>
+
+          <div class="col-md-2 align-self-center">
+            <button type="button"
+              class="btn btn-danger btn-block" 
+              (click)="deleteField(0,i)"
+              *ngIf="phones.length > 1">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" 
+              class="btn btn-success btn-block" 
+              (click)="addField(0)"
+              *ngIf="phones.length == (1+i) && phones.length != 3">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <hr class="mb-3">
+
+        <div>
+          <div class="row image_for_edit" *ngIf="!filesToUpload && contact.image && contact.image != 'null'">
+            <div class="col-md-12">
+                <img src="{{url + 'imagen/' + contact.image }}" 
+                    class="image">
+              </div>
+          </div>
+
+          <div class="row image_for_edit" *ngIf="filesToUpload">
+              
+              <div class="col-md-12" id="port">
+                <!-- Se agrega en la imagen con js --> 
+              </div>
+
+          </div>
+
+          <div class="row my-4">
+
+              <div class="col-md-12">
+
+                  <label for="avatar">Sube un avatar para el contacto</label>
+
+                  <input type="file" 
+                      name="avatar"
+                      class="form-control import-img" 
+                      id="avatar"
+                      (change)="fileChangeEvent($event)">
+
+              </div>
+
+          </div>
+
+        </div>
+
+        <div class="row my-4 justify-content-center">
+          <div class="col-md-6">
+            <button type="button" 
+              class="btn btn-dark btn-block" 
+              (click)="show.plus_custom = !show.plus_custom">
+              {{ show.plus_custom ? 'Ocultar campos' : 'Mostrar mas campos'}}
+            </button>
+          </div>
+
+        </div>
+
+        <hr class="mb-3" *ngIf="show.plus_custom">
+
+        <div *ngIf="show.plus_custom">
+
+          <div class="row my-4" *ngFor="let email of emails; let i = index">
+
+            <div class="col-md-5">
+
+              <label for="email{{i}}">Email #{{i+1}}</label>
+              <input type="email"
+                  name="email{{i}}"
+                  [(ngModel)]="email.name"
+                  #name="ngModel"
+                  id="email{{i}}"
+                  class="form-control">
+            </div>
+
+            <div class="col-md-5">
+
+              <label for="etag{{i}}">Etiqueta #{{ i+1 }}</label>
+
+              <select class="form-control"
+                id="etag{{i}}"
+                name="etag{{i}}"
+                [(ngModel)]="email.tag"
+                #name="ngModel">
+                <option value="">Sin Etiqueta</option>
+                <option value="Casa">Casa</option>
+                <option value="Trabajo">Trabajo</option>
+                <option value="Otro">Otro</option>
+              </select>
+
+            </div>
+
+            <div class="col-md-2 align-self-center">
+              <button type="button"
+                class="btn btn-danger btn-block" 
+                (click)="deleteField(1,i)"
+                *ngIf="emails.length > 1">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" 
+                class="btn btn-success btn-block" 
+                (click)="addField(1)"
+                *ngIf="emails.length == (1+i) && emails.length != 3">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+
+          </div>
+
+          <hr class="mb-3">
+
+          <div class="row my-4">
+
+            <div class="col-md-4">
+
+              <label for="address"> Direccion </label>
+              <input type="text"
+                  name="address"
+                  [(ngModel)]="contact.address"
+                  #name="ngModel"
+                  id="address"
+                  class="form-control">
+            </div>
+
+            <div class="col-md-4">
+
+              <label for="relationship"> Relación </label>
+
+              <input type="text"
+                  name="relationship"
+                  [(ngModel)]="contact.relationship"
+                  #name="ngModel"
+                  id="relationship"
+                  class="form-control">
+
+            </div>
+
+            <div class="col-md-4">
+
+              <label for="note"> Nota </label>
+
+              <input type="text"
+                  name="note"
+                  [(ngModel)]="contact.note"
+                  #name="ngModel"
+                  id="note"
+                  class="form-control">
+
+            </div>
+
+          </div>
+
+          <hr class="mb-3">
+          
+          <div class="row my-4" *ngFor="let custom of custom_field; let i = index">
+
+            <div class="col-md-5">
+
+              <label for="custom{{i}}"> Campo Personalizado </label>
+              <input type="text"
+                  name="custom{{i}}"
+                  [(ngModel)]="custom.name"
+                  #name="ngModel"
+                  id="custom{{i}}"
+                  class="form-control">
+            </div>
+
+            <div class="col-md-5">
+
+              <label for="content{{i}}"> Contenido </label>
+
+              <input type="text"
+                  name="content{{i}}"
+                  [(ngModel)]="custom.tag"
+                  #name="ngModel"
+                  id="content{{i}}"
+                  class="form-control">
+
+            </div>
+
+            <div class="col-md-2 align-self-center">
+              <button type="button"
+                class="btn btn-danger btn-block" 
+                (click)="deleteField(2,i)"
+                *ngIf="custom_field.length > 1">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" 
+                class="btn btn-success btn-block" 
+                (click)="addField(2)"
+                *ngIf="custom_field.length == (1+i) && custom_field.length != 3">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <hr class="mb-3">
+
+
+        <button type="submit"
+            class="btn btn-success btn-lg btn-block"
+            [disabled]="!formAdd.form.valid">
+            Agregar
+        </button>
+  
+      </form>
+  
+  </div>
+
+</div>

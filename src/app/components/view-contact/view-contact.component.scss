@@ -1,0 +1,31 @@
+.card-contact {
+  min-height: 162px;
+  margin: 1rem auto;
+}
+
+.card-img {
+  display: inline-block;
+  padding: 0px;
+  margin: 0px;
+  margin: auto;
+  min-height: 162px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  object-fit: cover;
+  object-position: center;
+  min-height: 162px;
+}
+
+.btn-circle {
+  border-radius: 50%;
+}
+
+.avatar-letter{
+  width: 64px;
+  height: 64px;
+  margin:auto;
+  margin-top: 49px;
+  text-align:center;
+}
